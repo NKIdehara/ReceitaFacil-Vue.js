@@ -1,20 +1,28 @@
+<!-- 
+/***************************************************************************************
+*  
+*  ASSESSMENT
+*  Instituto Infnet
+*  Engenharia de Software
+*
+*  Frameworks Front-end e conexão com Back-end
+*
+*  Aluno: Nelson Kenji Idehara
+*  Professora: Gioliano Barbosa Bertoni
+*  Data: Setembro 2022
+*
+***************************************************************************************/
+-->
+
 <template>
     <div class="receita">
         <router-link to="/">&lt; Voltar</router-link>
         <h1>{{ receita.titulo }}</h1>
         <p class="descricao">{{ receita.descricao }}</p>
         <hr />
-        <div class="ingredientes">
-            <h3>Ingredientes</h3>
-            <ul>
-                <li v-for="(ingrediente, i) in receita.ingredientes" :key="i"> {{ ingrediente }} </li>
-            </ul>
-        </div>
         <div class="preparo">
             <h3>Preparo</h3>
-            <ul>
-                <li v-for="(preparo, i) in receita.preparos" :key="i"> {{ preparo }} </li>
-            </ul>
+            <p class="preparo">{{ receita.preparo }}</p>
         </div>
     </div>
 </template>

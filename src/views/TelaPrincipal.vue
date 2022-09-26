@@ -1,3 +1,19 @@
+<!-- 
+/***************************************************************************************
+*  
+*  ASSESSMENT
+*  Instituto Infnet
+*  Engenharia de Software
+*
+*  Frameworks Front-end e conexão com Back-end
+*
+*  Aluno: Nelson Kenji Idehara
+*  Professora: Gioliano Barbosa Bertoni
+*  Data: Setembro 2022
+*
+***************************************************************************************/
+-->
+
 <template>
   <div class="home">
     <h1>Receita Fácil</h1>
@@ -9,6 +25,7 @@
       <router-link :to="`/receita/${receita.id}`">
         <button>Ver Receita</button>
       </router-link>
+      <button @click="apagarReceita(receita)">Apagar</button>
 
     </div>
 
@@ -30,19 +47,8 @@
           </div>
 
           <div class="grupo">
-            <label>Ingredientes</label>
-            <div class="ingredientes" v-for="i in novaReceita.indiceIngrediente" :key="i">
-              <input type="text" v-model="novaReceita.ingredientes[i-1]" />
-            </div>
-            <button type="button" @click="adicionarIngrediente">Incluir ingrediente</button>
-          </div>
-
-          <div class="grupo">
             <label>Preparo</label>
-            <div class="preparo" v-for="i in novaReceita.indicePreparo" :key="i">
-              <input type="text" v-model="novaReceita.preparos[i-1]">
-            </div>
-            <button type="button" @click="adicionarPreparo">Incluir passo</button>
+            <textarea v-model="novaReceita.preparo"></textarea>
           </div>
 
           <button type="submit">Adicionar Receita</button>
@@ -59,18 +65,13 @@
 import {ref} from 'vue';
 import {useStore} from 'vuex';
 
-
-
 export default {
   name: 'TelaPrincipal',
   setup() {
     const novaReceita = ref({
       titulo: '',
       descricao: '',
-      ingredientes: [],
-      preparos: [],
-      indiceIngrediente: 1,
-      indicePreparo: 1
+      preparo: '',
     });
 
     const popupOpen = ref(false);
@@ -80,15 +81,7 @@ export default {
       popupOpen.value = !popupOpen.value;
     }
 
-    const adicionarIngrediente = () => {
-      novaReceita.value.indiceIngrediente++;
-    }
-
-    const adicionarPreparo = () => {
-      novaReceita.value.indicePreparo++;
-    }
-
-    const adicionarReceita  = () => {
+    const adicionarReceita = () => {
       novaReceita.value.id = novaReceita.value.titulo.toLowerCase().replace(/\s/g, '-');
 
       if (novaReceita.value.id == '') {
@@ -101,24 +94,23 @@ export default {
       novaReceita.value = {
         titulo: '',
         descricao: '',
-        ingredientes: [],
-        preparos: [],
-        indiceIngrediente: 1,
-        indicePreparo: 1
+        preparo: '',
       };
 
       togglePopup();
+    }
+
+    const apagarReceita = (receita) => {
+      store.commit('APAGAR_RECEITA', { ...receita });
     }
 
     return {
       novaReceita, 
       togglePopup,
       popupOpen,
-      adicionarIngrediente,
-      adicionarPreparo,
-      adicionarReceita
+      adicionarReceita,
+      apagarReceita
     }
-
-  }
+  },
 }
 </script>
