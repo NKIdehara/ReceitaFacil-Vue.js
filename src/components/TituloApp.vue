@@ -1,3 +1,4 @@
+<!-- 
 /***************************************************************************************
 *  
 *  ASSESSMENT
@@ -11,10 +12,25 @@
 *  Data: Setembro 2022
 *
 ***************************************************************************************/
+-->
 
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+<template>
+    <h1>Receita Fácil</h1>
+</template>
 
-createApp(App).use(store).use(router).mount('#app')
+<script>
+    export default {
+        name: 'TituloApp',
+    }
+</script>
+
+<style scoped>
+
+h1 {
+    font-size: 40px;
+    background-color: coral;
+    color: white;
+    text-align: center;
+}
+
+</style>

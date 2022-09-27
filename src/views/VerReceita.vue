@@ -17,23 +17,33 @@
 <template>
     <div class="receita">
         <router-link to="/">&lt; Voltar</router-link>
-        <h1>{{ receita.titulo }}</h1>
+        <h1>{{ receita.titulo }} | {{ receita.tipo }}</h1>
         <p class="descricao">{{ receita.descricao }}</p>
         <hr />
         <div class="preparo">
             <h3>Preparo</h3>
             <p class="preparo">{{ receita.preparo }}</p>
         </div>
+        <hr />
+        <p>Criado em {{ format_date(receita.data) }}</p>
     </div>
 </template>
 
 <script>
+    import moment from 'moment'
+
     export default {
         computed: {
             receita () {
                 return this.$store.state.receitas.find(receita => receita.id === this.$route.params.id)
             }
-        }
-
+        },
+        methods: {
+          // Formata data utilizando 'Moment.js'
+          format_date(value) {
+            let d = new Date(value);
+            return moment(String(d)).format('DD/MM/YYYY');
+          },
+        },        
     }
 </script>

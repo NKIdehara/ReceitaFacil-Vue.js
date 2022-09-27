@@ -21,19 +21,25 @@ export default createStore({
         id: 'arroz',
         titulo: 'Arroz',
         descricao: 'Arroz branco',
-        preparo: 'Lavar o arroz; Colocar sal e cozinhar por 30 minutos.'
+        preparo: 'Lavar o arroz; Colocar sal e cozinhar por 30 minutos.',
+        data: Date.now(),
+        tipo: 'Salgado',
       },
       {
         id: 'carne',
         titulo: 'Carne',
         descricao: 'Carne grelhada',
-        preparo: 'Temperar a carne; Assar até dourar.'
+        preparo: 'Temperar a carne; Assar até dourar.',
+        data: Date.now(),
+        tipo: 'Salgado',
       },
       {
         id: 'macarrao',
         titulo: 'Macarrão',
         descricao: 'Macarrão com molho',
-        preparo: 'Cozinhar o macarrão; Escorrer e colocar o molho.'
+        preparo: 'Cozinhar o macarrão; Escorrer e colocar o molho.',
+        data: Date.now(),
+        tipo: 'Salgado',
       }
     ]
   },

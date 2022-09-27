@@ -16,9 +16,13 @@
 
 <template>
   <div class="home">
-    <h1>Receita Fácil</h1>
+    <TituloApp />
     <button @click="togglePopup">Nova Receita</button>
 
+    <!-- Verifica se há alguma receita a ser exibida -->
+    <h1 v-if="$store.state.receitas == 0">Não há receitas disponíveis!</h1>
+
+    <!-- Lista receitas -->
     <div class="card" v-for="receita in $store.state.receitas" :key="receita.id">
       <h2>{{ receita.titulo }}</h2>
       <p>{{ receita.descricao }}</p>
@@ -26,10 +30,7 @@
         <button>Ver Receita</button>
       </router-link>
       <button @click="apagarReceita(receita)">Apagar</button>
-
     </div>
-
-    <div class="receitas"></div>
 
     <div class="adicionar-receita" v-if="popupOpen">
       <div class="popup-nova-receita">
@@ -51,6 +52,16 @@
             <textarea v-model="novaReceita.preparo"></textarea>
           </div>
 
+          <div class="grupo">
+            <label>Tipo</label>
+            <select v-model="novaReceita.tipo">
+              <option value="Salgado">Salgado</option>
+              <option value="Doce">Doce</option>
+              <option value="Azedo">Azedo</option>
+              <option value="Amargo">Amargo</option>
+            </select>
+          </div>
+
           <button type="submit">Adicionar Receita</button>
           <button type="button" @click="togglePopup">Fechar</button>
 
@@ -64,14 +75,20 @@
 <script>
 import {ref} from 'vue';
 import {useStore} from 'vuex';
+import TituloApp from '../components/TituloApp.vue'
 
 export default {
   name: 'TelaPrincipal',
+  components: {
+    TituloApp
+  },
   setup() {
     const novaReceita = ref({
       titulo: '',
       descricao: '',
       preparo: '',
+      data: '',
+      tipo: '',
     });
 
     const popupOpen = ref(false);
@@ -83,9 +100,19 @@ export default {
 
     const adicionarReceita = () => {
       novaReceita.value.id = novaReceita.value.titulo.toLowerCase().replace(/\s/g, '-');
+      novaReceita.value.data = Date.now();
 
+      // Validação dos Campos
       if (novaReceita.value.id == '') {
-        alert ("Título da receita inválido!");
+        alert ("Nome da receita inválido!");
+        return;
+      }
+      if (novaReceita.value.descricao == '') {
+        alert ("Descrição da receita inválida!");
+        return;
+      }
+      if (novaReceita.value.preparo == '') {
+        alert ("Preparo da receita inválido!");
         return;
       }
 
@@ -95,6 +122,8 @@ export default {
         titulo: '',
         descricao: '',
         preparo: '',
+        data: '',
+        tipo: '',
       };
 
       togglePopup();

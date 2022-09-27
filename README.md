@@ -1,6 +1,5 @@
 # ASSESSMENT
-## Instituto Infnet
-## Engenharia de Software
+## Instituto Infnet / Engenharia de Software
 ## Frameworks Front-end e conexão com Back-end
 ### Aluno: Nelson Kenji Idehara
 ### Professora: Gioliano Barbosa Bertoni
