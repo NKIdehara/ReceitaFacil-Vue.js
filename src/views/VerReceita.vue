@@ -15,8 +15,8 @@
 -->
 
 <template>
+    <router-link to="/">&lt; Voltar</router-link>
     <div class="receita">
-        <router-link to="/">&lt; Voltar</router-link>
         <h1>{{ receita.titulo }} | {{ receita.tipo }}</h1>
         <p class="descricao">{{ receita.descricao }}</p>
         <hr />
@@ -47,3 +47,14 @@
         },        
     }
 </script>
+
+<style scoped>
+
+.receita {
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 2rem;
+  background-color: powderblue;
+}
+
+</style>

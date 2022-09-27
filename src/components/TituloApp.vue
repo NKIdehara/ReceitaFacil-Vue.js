@@ -28,7 +28,7 @@
 
 h1 {
     font-size: 40px;
-    background-color: coral;
+    background-color: darkblue;
     color: white;
     text-align: center;
 }

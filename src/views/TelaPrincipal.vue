@@ -17,43 +17,49 @@
 <template>
   <div class="home">
     <TituloApp />
-    <button @click="togglePopup">Nova Receita</button>
 
-    <!-- Verifica se há alguma receita a ser exibida -->
-    <h1 v-if="$store.state.receitas == 0">Não há receitas disponíveis!</h1>
+    <div v-if="!popupOpen">
+      <button @click="togglePopup">Nova Receita</button>
 
-    <!-- Lista receitas -->
-    <div class="card" v-for="receita in $store.state.receitas" :key="receita.id">
-      <h2>{{ receita.titulo }}</h2>
-      <p>{{ receita.descricao }}</p>
-      <router-link :to="`/receita/${receita.id}`">
-        <button>Ver Receita</button>
-      </router-link>
-      <button @click="apagarReceita(receita)">Apagar</button>
+      <div class="mostrar-receitas">
+        <!-- Verifica se há alguma receita a ser exibida -->
+        <h1 v-if="$store.state.receitas == 0">Não há receitas disponíveis!</h1>
+
+        <!-- Lista receitas -->
+        <div class="card" v-for="receita in $store.state.receitas" :key="receita.id">
+          <h2>{{ receita.titulo }}</h2>
+          <p>{{ receita.descricao }}</p>
+          <router-link :to="`/receita/${receita.id}`">
+            <button>Ver Receita</button>
+          </router-link>
+          <button @click="apagarReceita(receita)">Apagar</button>
+        </div>
+      </div>
     </div>
 
+    <!-- Popup para adicionar receita -->
     <div class="adicionar-receita" v-if="popupOpen">
       <div class="popup-nova-receita">
         <h2>Adicionar Nova Receita</h2>
 
         <form @submit.prevent="adicionarReceita">
           <div class="grupo">
-            <label>Nome da Receita</label>
+            <label>Nome da Receita </label>
             <input type="text" v-model="novaReceita.titulo" />
           </div>
 
           <div class="grupo">
-            <label>Descrição da Receita</label>
+            <label>Descrição da Receita </label>
             <textarea v-model="novaReceita.descricao"></textarea>
           </div>
 
           <div class="grupo">
-            <label>Preparo</label>
+            <label>Preparo </label>
             <textarea v-model="novaReceita.preparo"></textarea>
           </div>
 
           <div class="grupo">
-            <label>Tipo</label>
+            <label>Tipo </label>
             <select v-model="novaReceita.tipo">
               <option value="Salgado">Salgado</option>
               <option value="Doce">Doce</option>
@@ -143,3 +149,34 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+button {
+  margin: 5px;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 2rem;
+  background-color: powderblue;
+}
+
+.mostrar-receitas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
+
+.adicionar-receita {
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 2rem;
+  background-color: lightgreen;
+}
+
+.adicionar-receita .grupo {
+  margin-bottom: 10px;
+}
+
+</style>
