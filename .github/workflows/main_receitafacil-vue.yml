@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'receitafacil-vue'
           slot-name: 'Production'
-          package: .
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0F04EFB404D444C58C5D52922EE889D5 }}
